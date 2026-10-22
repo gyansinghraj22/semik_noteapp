@@ -5,7 +5,7 @@ showSuccessSnackBar(BuildContext context, String text) {
   return ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       content: Text(text),
-      backgroundColor: AppColor.successColor,
+      backgroundColor: Colors.green,
       padding: const EdgeInsets.only(left: 16),
       shape: const StadiumBorder(),
       behavior: SnackBarBehavior.floating,
@@ -31,7 +31,7 @@ showErrorSnackBar(BuildContext context, String text) {
   return ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       content: Text(text),
-      backgroundColor: AppColor.errorColor,
+      backgroundColor: Colors.red,
       padding: const EdgeInsets.only(left: 16),
       shape: const StadiumBorder(),
       behavior: SnackBarBehavior.floating,
@@ -57,7 +57,7 @@ showAppExistSnackBar(BuildContext context) {
   return ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       content: const Text("Click once more to exit app"),
-      backgroundColor: AppColor.appThemeColor,
+      backgroundColor: AppColors.secondary,
       padding: const EdgeInsets.only(left: 16),
       shape: const StadiumBorder(),
       behavior: SnackBarBehavior.floating,
@@ -83,7 +83,7 @@ showSnackBar(BuildContext context, String text) {
   return ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       content: Text(text),
-      backgroundColor: AppColor.appThemeColor,
+      backgroundColor: AppColors.primary,
       padding: const EdgeInsets.only(left: 16),
       shape: const StadiumBorder(),
       behavior: SnackBarBehavior.floating,

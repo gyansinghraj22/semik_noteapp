@@ -4,4 +4,5 @@ class ApiUrl {
   static const String register = "";
   static const String addNote = "";
   static const String deleteNote = "";
+  static const String refreshToken = "";
 }

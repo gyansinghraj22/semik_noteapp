@@ -104,7 +104,7 @@ class _CustomOtpInputFormFieldState extends State<CustomOtpInputFormField> {
         errorPinTheme: defaultPinTheme.copyBorderWith(
           border: Border.all(color: Colors.redAccent),
         ),
-        errorTextStyle: const TextStyle(fontSize: 12, color: AppColor.redColor),
+        errorTextStyle: const TextStyle(fontSize: 12, color: AppColors.redColor),
         errorText: "Pin must be ${widget.numberOfFields} digits",
       ),
     );

@@ -9,4 +9,5 @@ enum KeyString {
   networkName,
   userId,
   isLoginUser,
+  onboardUser
 }

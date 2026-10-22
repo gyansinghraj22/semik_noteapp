@@ -54,11 +54,10 @@ class _CustomDropDownFormFieldState extends State<CustomDropDownFormField> {
         ),
         SizedBox(height: 8),
         TextFormField(
-          style:
-              context
-                  .textStyle(palette: ColorPalete.slate, swatch: 700)
-                  .large
-                  .regular,
+          style: context
+              .textStyle(palette: ColorPalete.slate, swatch: 700)
+              .large
+              .regular,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           onChanged: widget.config.onChanged ?? widget.config.onFieldSubmitted,
           onSaved: widget.config.onSaved ?? widget.config.onFieldSubmitted,
@@ -84,21 +83,20 @@ class _CustomDropDownFormFieldState extends State<CustomDropDownFormField> {
             labelStyle: context.textBlackStyle().medium.semiBold.copyWith(
               color: const Color(0xFF7C7C7C),
             ),
-            suffixIcon:
-                widget.config.controller!.text.isEmpty
-                    ? const Icon(Icons.arrow_drop_down)
-                    : widget.config.enabled == true
-                    ? GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          widget.config.controller?.clear();
+            suffixIcon: widget.config.controller!.text.isEmpty
+                ? const Icon(Icons.arrow_drop_down)
+                : widget.config.enabled == true
+                ? GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        widget.config.controller?.clear();
 
-                          widget.config.onFieldSubmitted!.call("");
-                        });
-                      },
-                      child: const Icon(Icons.close, size: 18),
-                    )
-                    : null,
+                        widget.config.onFieldSubmitted!.call("");
+                      });
+                    },
+                    child: const Icon(Icons.close, size: 18),
+                  )
+                : null,
             hintText: widget.config.hintText,
           ),
           onTap: () {
@@ -121,150 +119,136 @@ class _CustomDropDownFormFieldState extends State<CustomDropDownFormField> {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
-      builder:
-          (context) => StatefulBuilder(
-            builder: (context, setModalState) {
-              return SizedBox(
-                height: MediaQuery.of(context).size.height * 0.90,
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
+      builder: (context) => StatefulBuilder(
+        builder: (context, setModalState) {
+          return SizedBox(
+            height: MediaQuery.of(context).size.height * 0.90,
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Visibility(
-                            visible: widget.config.options!.length > 10,
-                            child: Expanded(
-                              child: CustomFormField(
-                                config: CustomFormFieldConfig(
-                                  fieldType: FieldType.text,
-                                  controller: searchController,
-                                  id: "Search",
-                                  label: "Search",
-                                  onChanged: (val) {
-                                    setModalState(() {
-                                      if (val.isEmpty) {
-                                        allOptions =
-                                            widget.config.options ?? [];
-                                      } else {
-                                        final normalizedQuery = val.replaceAll(
-                                          ' ',
-                                          '',
-                                        );
-                                        allOptions =
-                                            allOptions.where((e) {
-                                              final title = e["label"] ?? '';
-                                              final normalizedTitle = title
-                                                  .replaceAll(' ', '');
-                                              return normalizedTitle.contains(
-                                                normalizedQuery,
-                                              );
-                                            }).toList();
-                                      }
-                                    });
-                                  },
-                                  isRequired: false,
-                                  prefixIcon: Padding(
-                                    padding: const EdgeInsets.only(
-                                      right: 16,
-                                      left: 16,
-                                    ),
-                                    child: iconoir.Search(
-                                      color: context.applyAppColor(
-                                        palette: ColorPalete.brand,
-                                        swatch: 700,
-                                      ),
-                                    ),
-                                  ),
+                      Visibility(
+                        visible: widget.config.options!.length > 10,
+                        child: Expanded(
+                          child: CustomFormField(
+                            config: CustomFormFieldConfig(
+                              fieldType: FieldType.text,
+                              controller: searchController,
+                              id: "Search",
+                              label: "Search",
+                              onChanged: (val) {
+                                setModalState(() {
+                                  if (val.isEmpty) {
+                                    allOptions = widget.config.options ?? [];
+                                  } else {
+                                    final normalizedQuery = val.replaceAll(
+                                      ' ',
+                                      '',
+                                    );
+                                    allOptions = allOptions.where((e) {
+                                      final title = e["label"] ?? '';
+                                      final normalizedTitle = title.replaceAll(
+                                        ' ',
+                                        '',
+                                      );
+                                      return normalizedTitle.contains(
+                                        normalizedQuery,
+                                      );
+                                    }).toList();
+                                  }
+                                });
+                              },
+                              isRequired: false,
+                              prefixIcon: Padding(
+                                padding: const EdgeInsets.only(
+                                  right: 16,
+                                  left: 16,
                                 ),
+                                child: iconoir.Search(color: AppColors.primary),
                               ),
                             ),
                           ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: Text(
-                              "Cancel",
-                              style:
-                                  context
-                                      .textStyle(
-                                        palette: ColorPalete.slate,
-                                        swatch: 700,
-                                      )
-                                      .medium
-                                      .semiBold,
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
-                      const SizedBox(height: 12),
-                      Expanded(
-                        child:
-                            allOptions.isNotEmpty
-                                ? ListView.builder(
-                                  physics: const BouncingScrollPhysics(),
-                                  itemCount: allOptions.length,
-                                  itemBuilder: (context, index) {
-                                    return CustomCard(
-                                      cardHeight: 50,
-                                      child: CustomListTile(
-                                        onPress: () {
-                                          Navigator.pop(context);
-                                          setState(() {
-                                            widget.config.controller!.text =
-                                                allOptions[index]["label"];
-                                            if (widget
-                                                    .config
-                                                    .onFieldSubmitted !=
-                                                null) {
-                                              widget.config.onFieldSubmitted!
-                                                  .call(
-                                                    allOptions[index]["value"],
-                                                  );
-                                            }
-                                          });
-                                        },
-                                        title: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Text(
-                                            "${allOptions[index]['label']}",
-                                            style:
-                                                context
-                                                    .textStyle(
-                                                      palette:
-                                                          ColorPalete.slate,
-                                                      swatch: 700,
-                                                    )
-                                                    .medium
-                                                    .semiBold,
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                )
-                                : Center(
-                                  child: Text(
-                                    "No Data Found",
-                                    style:
-                                        context
-                                            .textStyle(
-                                              palette: ColorPalete.slate,
-                                              swatch: 700,
-                                            )
-                                            .large
-                                            .semiBold,
-                                  ),
-                                ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text(
+                          "Cancel",
+                          style: context
+                              .textStyle(
+                                palette: ColorPalete.slate,
+                                swatch: 700,
+                              )
+                              .medium
+                              .semiBold,
+                        ),
                       ),
                     ],
                   ),
-                ),
-              );
-            },
-          ),
+                  const SizedBox(height: 12),
+                  Expanded(
+                    child: allOptions.isNotEmpty
+                        ? ListView.builder(
+                            physics: const BouncingScrollPhysics(),
+                            itemCount: allOptions.length,
+                            itemBuilder: (context, index) {
+                              return CustomCard(
+                                cardHeight: 50,
+                                child: CustomListTile(
+                                  onPress: () {
+                                    Navigator.pop(context);
+                                    setState(() {
+                                      widget.config.controller!.text =
+                                          allOptions[index]["label"];
+                                      if (widget.config.onFieldSubmitted !=
+                                          null) {
+                                        widget.config.onFieldSubmitted!.call(
+                                          allOptions[index]["value"],
+                                        );
+                                      }
+                                    });
+                                  },
+                                  title: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      "${allOptions[index]['label']}",
+                                      style: context
+                                          .textStyle(
+                                            palette: ColorPalete.slate,
+                                            swatch: 700,
+                                          )
+                                          .medium
+                                          .semiBold,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          )
+                        : Center(
+                            child: Text(
+                              "No Data Found",
+                              style: context
+                                  .textStyle(
+                                    palette: ColorPalete.slate,
+                                    swatch: 700,
+                                  )
+                                  .large
+                                  .semiBold,
+                            ),
+                          ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 

@@ -2,10 +2,18 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:noteapp/constants/api_urls.dart';
+import 'package:noteapp/constants/api_url.dart';
 import 'package:noteapp/constants/key_string.dart';
 import 'package:noteapp/core/navigation_service/navigation_service.dart';
 import 'package:noteapp/core/utils/shared_pref.dart';
+
+const Set<String> noAuthPaths = {
+  '/auth/login',
+  '/auth/register',
+  '/auth/refresh-token',
+  '/auth/forgot-password',
+  '/auth/reset-password',
+};
 
 class AuthorizationInterceptor extends Interceptor {
   bool _isRefreshing = false;
@@ -57,8 +65,11 @@ class AuthorizationInterceptor extends Interceptor {
     final requestOptions = err.requestOptions;
 
     // Only attempt refresh for requests that require auth and when we received 401
-    if (err.response?.statusCode == 401 && _needAuthorizationHeader(requestOptions)) {
-      final refreshToken = SharedPref.getStringValue(KeyString.refreshTokenKey.name);
+    if (err.response?.statusCode == 401 &&
+        _needAuthorizationHeader(requestOptions)) {
+      final refreshToken = SharedPref.getStringValue(
+        KeyString.refreshToken.name,
+      );
 
       if (refreshToken.isEmpty) {
         // No refresh token available -> logout
@@ -94,11 +105,12 @@ class AuthorizationInterceptor extends Interceptor {
       try {
         final refreshDio = Dio(BaseOptions(baseUrl: requestOptions.baseUrl));
         final refreshResponse = await refreshDio.post(
-          ApiUrls.refreshToken,
+          ApiUrl.refreshToken,
           data: {'refreshToken': refreshToken},
         );
 
-        if (refreshResponse.statusCode == 200 || refreshResponse.statusCode == 201) {
+        if (refreshResponse.statusCode == 200 ||
+            refreshResponse.statusCode == 201) {
           final newAccess = refreshResponse.data['accessToken'] ?? '';
           final newRefresh = refreshResponse.data['refreshToken'] ?? '';
 
@@ -109,9 +121,15 @@ class AuthorizationInterceptor extends Interceptor {
             return handler.next(err);
           }
 
-          await SharedPref.setStringValue(KeyString.authTokenKey.name, newAccess);
+          await SharedPref.setStringValue(
+            KeyString.authTokenKey.name,
+            newAccess,
+          );
           if (newRefresh.isNotEmpty) {
-            await SharedPref.setStringValue(KeyString.refreshTokenKey.name, newRefresh);
+            await SharedPref.setStringValue(
+              KeyString.refreshToken.name,
+              newRefresh,
+            );
           }
 
           _isRefreshing = false;

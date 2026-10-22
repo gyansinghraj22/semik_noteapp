@@ -171,7 +171,7 @@ class _CustomDropDownFormFieldState extends State<CustomDropDownFormField> {
                                       left: 16,
                                     ),
                                     child: iconoir.Search(
-                                      color: context.applyAppColor(
+                                      color: context.applyAppColors(
                                         palette: ColorPalete.brand,
                                         swatch: 700,
                                       ),

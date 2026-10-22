@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:noteapp/constants/app_colors.dart';
-import 'package:noteapp/core/common/custom_button/custom_button.dart';
+import 'package:noteapp/core/common/custom_bottom_sheet/custom_button.dart';
 import 'package:noteapp/core/extention/color_extention.dart';
 import 'package:noteapp/core/typography/font_style_extentions.dart';
 
@@ -81,7 +81,7 @@ class PlatformDialog {
                         child: Text(
                           cancelText,
                           style: const TextStyle(
-                            color: AppColor.redColor,
+                            color: AppColors.redColor,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
@@ -91,7 +91,7 @@ class PlatformDialog {
                       child: Text(
                         confirmText,
                         style: const TextStyle(
-                          color: AppColor.appThemeColor,
+                          color: AppColors.appThemeColor,
                           fontWeight: FontWeight.w700,
                         ),
                       ),

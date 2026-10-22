@@ -8,6 +8,8 @@ import 'package:noteapp/core/common/custom_form_field/custom_drop_down.dart';
 import 'package:noteapp/core/common/custom_form_field/custom_radio_button.dart';
 // import 'package:noteapp/core/common/custom_form_field/popup_drop_down.dart';
 import 'package:noteapp/core/common/custom_form_field/custom_switch.dart';
+import 'package:noteapp/core/extention/color_extention.dart';
+import 'package:noteapp/core/typography/font_style_extentions.dart';
 import 'package:noteapp/core/utils/form_field/decoration.dart';
 import 'package:noteapp/core/utils/form_field/input_formatter.dart';
 import 'package:noteapp/core/utils/form_field/keyboard_selector.dart';
@@ -169,7 +171,7 @@ class _CustomFormFieldState extends State<CustomFormField> {
                     : widget.config.suffixIcon,
             focusedBorder: FormFieldDecoration.getFocusedBorder(context),
             border: FormFieldDecoration.getBoarder(),
-            fillColor: AppColor.greyColor.withAlpha(20),
+            fillColor: AppColors.greyColor.withAlpha(20),
             filled: true,
             focusColor: widget.config.style == null ? null : Colors.white,
             prefixIcon: widget.config.prefixIcon,
@@ -177,7 +179,7 @@ class _CustomFormFieldState extends State<CustomFormField> {
             // labelText:
             //     "${widget.config.label}${widget.config.isRequired ?? false ? " * " : ""}",
             // labelStyle: context.textBlackStyle().medium.regular.copyWith(
-            //   color: AppColor.greyColor.withAlpha(254),
+            //   color: AppColors.greyColor.withAlpha(254),
             // ),
           ),
         ),

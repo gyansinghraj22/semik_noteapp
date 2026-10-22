@@ -23,7 +23,7 @@ class EmptyDataContainer extends StatelessWidget {
         height: 370,
         width: double.maxFinite,
         decoration: BoxDecoration(
-          color: AppColor.whiteColor,
+          color: AppColors.whiteColor,
           borderRadius: const BorderRadius.all(Radius.circular(20)),
           boxShadow: [
             BoxShadow(

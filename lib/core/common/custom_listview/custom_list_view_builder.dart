@@ -49,66 +49,63 @@ class _CustomListViewBuilderState extends State<CustomListViewBuilder> {
   Widget build(BuildContext context) {
     return widget.data.isNotEmpty
         ? ListView.builder(
-          shrinkWrap: true,
-          physics: const BouncingScrollPhysics(),
-          itemCount: widget.data.length,
-          scrollDirection: Axis.vertical,
-          itemBuilder: (BuildContext context, index) {
-            var data = widget.data[index];
-            return CustomCard(
-              cardBoarderColor: widget.cardBoarderColor,
-              cardColor: widget.cardColor,
-              cardHeight: widget.cardHeight,
-              borderRadius: widget.borderRadius,
-              padding: widget.listViewBodyPadding,
-              onTap: widget.onTap,
-              child: Padding(
-                padding:
-                    widget.listViewBodyPadding ??
-                    EdgeInsets.only(
-                      left: 16.w,
-                      right: 16.w,
-                      top: 12.h,
-                      bottom: 6.h,
-                    ),
-                child: CustomListTile(
-                  onPress:
-                      widget.onNavigate == null
-                          ? null
-                          : () {
+            shrinkWrap: true,
+            physics: const BouncingScrollPhysics(),
+            itemCount: widget.data.length,
+            scrollDirection: Axis.vertical,
+            itemBuilder: (BuildContext context, index) {
+              var data = widget.data[index];
+              return CustomCard(
+                cardBoarderColor: widget.cardBoarderColor,
+                cardColor: widget.cardColor,
+                cardHeight: widget.cardHeight,
+                borderRadius: widget.borderRadius,
+                padding: widget.listViewBodyPadding,
+                onTap: widget.onTap,
+                child: Padding(
+                  padding:
+                      widget.listViewBodyPadding ??
+                      EdgeInsets.only(
+                        left: 16.w,
+                        right: 16.w,
+                        top: 12.h,
+                        bottom: 6.h,
+                      ),
+                  child: CustomListTile(
+                    onPress: widget.onNavigate == null
+                        ? null
+                        : () {
                             Navigator.pushNamed(
                               context,
                               widget.onNavigate.toString(),
                               arguments: data,
                             );
                           },
-                  leading: Image.asset(
-                    AppImages.avatarImage,
-                    width: 80,
-                    height: 80,
+                    leading: Image.asset(
+                      AppImages.appIcons,
+                      width: 80,
+                      height: 80,
+                    ),
+                    title: Text(
+                      data.title ?? "",
+                      style: context
+                          .textStyle(palette: ColorPalete.slate, swatch: 700)
+                          .large
+                          .semiBold,
+                    ),
+                    subTitle: Text(
+                      data.subtitle ?? "",
+                      style: context
+                          .textStyle(palette: ColorPalete.slate)
+                          .small
+                          .regular,
+                    ),
+                    trailing: data.trailing,
                   ),
-                  title: Text(
-                    data.title ?? "",
-                    style:
-                        context
-                            .textStyle(palette: ColorPalete.slate, swatch: 700)
-                            .large
-                            .semiBold,
-                  ),
-                  subTitle: Text(
-                    data.subtitle ?? "",
-                    style:
-                        context
-                            .textStyle(palette: ColorPalete.slate)
-                            .small
-                            .regular,
-                  ),
-                  trailing: data.trailing,
                 ),
-              ),
-            );
-          },
-        )
+              );
+            },
+          )
         : const Center(child: Text("No Statements Found"));
   }
 }
@@ -141,16 +138,9 @@ class CustomCard extends StatelessWidget {
         child: Container(
           height: cardHeight ?? 80.h,
           decoration: BoxDecoration(
-            color:
-                cardColor ??
-                context.applyAppColor(palette: ColorPalete.white, swatch: 500),
+            color: cardColor ?? Colors.white,
             border: Border.all(
-              color:
-                  cardBoarderColor ??
-                  context.applyAppColor(
-                    palette: ColorPalete.slate,
-                    swatch: 200,
-                  ),
+              color: cardBoarderColor ?? Colors.grey.shade300,
               width: 1.0,
             ),
             borderRadius: BorderRadius.circular(borderRadius ?? 4.r),
@@ -182,7 +172,7 @@ class CustomListViewCardSizedDefined extends StatelessWidget {
       width: width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: cardColor ?? AppColor.whiteColor,
+        color: cardColor ?? AppColors.whiteColor,
       ),
       child: child,
     );

@@ -23,7 +23,7 @@ class LoadingOverlay {
                       padding: EdgeInsets.all(13.0),
                       child: CircularProgressIndicator(
                         valueColor: AlwaysStoppedAnimation(
-                          AppColor.appThemeColor,
+                          AppColors.appThemeColor,
                         ),
                       ),
                     ),
@@ -49,7 +49,7 @@ class LoadingOverlay {
                   color: const Color(0x80000000),
                   child: Center(
                     child: Card(
-                      color: AppColor.whiteColor,
+                      color: AppColors.whiteColor,
                       child: Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Row(
@@ -66,7 +66,7 @@ class LoadingOverlay {
                             const SizedBox(width: 10),
                             const CircularProgressIndicator(
                               valueColor: AlwaysStoppedAnimation(
-                                AppColor.appThemeColor,
+                                AppColors.appThemeColor,
                               ),
                             ),
                           ],

@@ -37,7 +37,7 @@ class _CustomImagePickerFormFieldState
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
-                color: AppColor.greyColor,
+                color: Colors.grey,
                 width: 4.0,
                 style: BorderStyle.solid,
               ),
@@ -56,7 +56,7 @@ class _CustomImagePickerFormFieldState
                 context: context,
                 child: Container(
                   decoration: const BoxDecoration(
-                    color: AppColor.greyColor,
+                    color: Colors.grey,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(40),
                       topRight: Radius.circular(40),

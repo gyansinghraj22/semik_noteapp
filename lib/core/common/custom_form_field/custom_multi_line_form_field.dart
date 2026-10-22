@@ -93,7 +93,7 @@ class _CustomMultiLineFormFieldState extends State<CustomMultiLineFormField> {
               // hintText: widget.config.hintText ?? '',
               hintStyle: TextStyle(color: Colors.grey[400]),
               contentPadding: const EdgeInsets.all(16),
-              focusColor: AppColor.whiteColor,
+              focusColor: AppColors.whiteColor,
               counterText: '', // Hide default counter
             ),
             onFieldSubmitted: (value) {

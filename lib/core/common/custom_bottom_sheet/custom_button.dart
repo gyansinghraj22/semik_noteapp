@@ -43,7 +43,7 @@
 //             backgroundColor:
 //                 color != null
 //                     ? WidgetStateProperty.all(color)
-//                     : WidgetStateProperty.all(AppColor.appThemeColor),
+//                     : WidgetStateProperty.all(AppColors.appThemeColor),
 //             shape: WidgetStateProperty.all<RoundedRectangleBorder>(
 //               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
 //             ),
@@ -53,7 +53,7 @@
 //               showLoading == true
 //                   ? const Center(
 //                     child: CircularProgressIndicator(
-//                       color: AppColor.whiteColor,
+//                       color: AppColors.whiteColor,
 //                     ),
 //                   )
 //                   : Text(
@@ -134,7 +134,7 @@
 //         labelStyle ??
 //         context.textStyle(palette: ColorPalete.white).medium.semiBold;
 //     Color buttonColor =
-//         color ?? context.applyAppColor(palette: ColorPalete.brand);
+//         color ?? context.applyAppColors(palette: ColorPalete.brand);
 //     return GestureDetector(
 //       onTap: onPressed ?? () {},
 //       child: Container(
@@ -187,8 +187,8 @@
 //           style: TextStyle(
 //             color:
 //                 isDestructiveAction
-//                     ? AppColor.redColor
-//                     : AppColor.appThemeColor,
+//                     ? AppColors.redColor
+//                     : AppColors.appThemeColor,
 //             fontWeight: FontWeight.w700,
 //           ),
 //         ),
@@ -226,7 +226,7 @@
 //               color != null
 //                   ? WidgetStateProperty.all(color)
 //                   : WidgetStateProperty.all(
-//                     context.applyAppColor(
+//                     context.applyAppColors(
 //                       palette: ColorPalete.brand,
 //                       swatch: 500,
 //                     ),
@@ -239,7 +239,7 @@
 //         child:
 //             showLoading == true
 //                 ? const Center(
-//                   child: CircularProgressIndicator(color: AppColor.whiteColor),
+//                   child: CircularProgressIndicator(color: AppColors.whiteColor),
 //                 )
 //                 : Row(
 //                   mainAxisAlignment: MainAxisAlignment.center,
@@ -259,7 +259,7 @@
 //                     Iconoir.ArrowRight(
 //                       width: 20.w,
 //                       height: 20.h,
-//                       color: context.applyAppColor(palette: ColorPalete.white),
+//                       color: context.applyAppColors(palette: ColorPalete.white),
 //                     ),
 //                   ],
 //                 ),
@@ -306,7 +306,7 @@
 //           side: BorderSide(
 //             color:
 //                 borderColor ??
-//                 context.applyAppColor(palette: ColorPalete.brand, swatch: 500),
+//                 context.applyAppColors(palette: ColorPalete.brand, swatch: 500),
 //             width: 2,
 //           ),
 //           shape: RoundedRectangleBorder(
@@ -369,7 +369,7 @@
 //           side: BorderSide(
 //             color:
 //                 borderColor ??
-//                 context.applyAppColor(palette: ColorPalete.brand, swatch: 500),
+//                 context.applyAppColors(palette: ColorPalete.brand, swatch: 500),
 //             width: 2,
 //           ),
 //           shape: RoundedRectangleBorder(
@@ -427,31 +427,27 @@ class CustomButton extends StatelessWidget {
         width: width ?? MediaQuery.of(context).size.width,
         child: ElevatedButton(
           style: ButtonStyle(
-            backgroundColor:
-                color != null
-                    ? WidgetStateProperty.all(color)
-                    : WidgetStateProperty.all(AppColor.appThemeColor),
+            backgroundColor: color != null
+                ? WidgetStateProperty.all(color)
+                : WidgetStateProperty.all(AppColors.appThemeColor),
             shape: WidgetStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             ),
           ),
           onPressed: onPressed,
-          child:
-              showLoading == true
-                  ? const Center(
-                    child: CircularProgressIndicator(
-                      color: AppColor.whiteColor,
-                    ),
-                  )
-                  : Text(
-                    label,
-                    style:
-                        labelStyle ??
-                        context
-                            .textStyle(palette: ColorPalete.slate, swatch: 700)
-                            .large
-                            .semiBold,
-                  ),
+          child: showLoading == true
+              ? const Center(
+                  child: CircularProgressIndicator(color: AppColors.whiteColor),
+                )
+              : Text(
+                  label,
+                  style:
+                      labelStyle ??
+                      context
+                          .textStyle(palette: ColorPalete.slate, swatch: 700)
+                          .large
+                          .semiBold,
+                ),
         ),
       ),
     );
@@ -520,8 +516,7 @@ class CustomButtonWidthBoxShadow extends StatelessWidget {
     TextStyle labelTextStyle =
         labelStyle ??
         context.textStyle(palette: ColorPalete.white).medium.semiBold;
-    Color buttonColor =
-        color ?? context.applyAppColor(palette: ColorPalete.brand);
+    Color buttonColor = color ?? AppColors.primary;
     return GestureDetector(
       onTap: onPressed ?? () {},
       child: Container(
@@ -572,10 +567,9 @@ class CustomDialogButton extends StatelessWidget {
         child: Text(
           label,
           style: TextStyle(
-            color:
-                isDestructiveAction
-                    ? AppColor.redColor
-                    : AppColor.appThemeColor,
+            color: isDestructiveAction
+                ? AppColors.redColor
+                : AppColors.appThemeColor,
             fontWeight: FontWeight.w700,
           ),
         ),
@@ -609,47 +603,41 @@ class CustomButtonWithoutIcon extends StatelessWidget {
       width: width ?? MediaQuery.of(context).size.width,
       child: ElevatedButton(
         style: ButtonStyle(
-          backgroundColor:
-              color != null
-                  ? WidgetStateProperty.all(color)
-                  : WidgetStateProperty.all(
-                    context.applyAppColor(
-                      palette: ColorPalete.brand,
-                      swatch: 500,
-                    ),
+          backgroundColor: color != null
+              ? WidgetStateProperty.all(color)
+              : WidgetStateProperty.all(
+                  context.applyAppColors(
+                    palette: ColorPalete.brand,
+                    swatch: 500,
                   ),
+                ),
           shape: WidgetStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
           ),
         ),
         onPressed: onPressed,
-        child:
-            showLoading == true
-                ? const Center(
-                  child: CircularProgressIndicator(color: AppColor.whiteColor),
-                )
-                : Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      label,
-                      style:
-                          context
-                              .textStyle(
-                                palette: ColorPalete.white,
-                                swatch: 500,
-                              )
-                              .largeBody
-                              .semiBold,
-                    ),
-                    // SizedBox(width: 10.w),
-                    // Iconoir.ArrowRight(
-                    //   width: 20.w,
-                    //   height: 20.h,
-                    //   color: context.applyAppColor(palette: ColorPalete.white),
-                    // ),
-                  ],
-                ),
+        child: showLoading == true
+            ? const Center(
+                child: CircularProgressIndicator(color: AppColors.whiteColor),
+              )
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    label,
+                    style: context
+                        .textStyle(palette: ColorPalete.white, swatch: 500)
+                        .largeBody
+                        .semiBold,
+                  ),
+                  // SizedBox(width: 10.w),
+                  // Iconoir.ArrowRight(
+                  //   width: 20.w,
+                  //   height: 20.h,
+                  //   color: context.applyAppColors(palette: ColorPalete.white),
+                  // ),
+                ],
+              ),
       ),
     );
   }
@@ -693,7 +681,7 @@ class CustomOutlinedButtonWithIcon extends StatelessWidget {
           side: BorderSide(
             color:
                 borderColor ??
-                context.applyAppColor(palette: ColorPalete.brand, swatch: 500),
+                context.applyAppColors(palette: ColorPalete.brand, swatch: 500),
             width: 2,
           ),
           shape: RoundedRectangleBorder(
@@ -701,19 +689,18 @@ class CustomOutlinedButtonWithIcon extends StatelessWidget {
           ),
         ),
         onPressed: onPressed,
-        child:
-            showLoading == true
-                ? const Center(child: CircularProgressIndicator())
-                : Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    if (isIconLeft && icon != null) icon!,
-                    if (isIconLeft && icon != null) SizedBox(width: 10.w),
-                    Text(label, style: labelTextStyle),
-                    if (!isIconLeft && icon != null) SizedBox(width: 10.w),
-                    if (!isIconLeft && icon != null) icon!,
-                  ],
-                ),
+        child: showLoading == true
+            ? const Center(child: CircularProgressIndicator())
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (isIconLeft && icon != null) icon!,
+                  if (isIconLeft && icon != null) SizedBox(width: 10.w),
+                  Text(label, style: labelTextStyle),
+                  if (!isIconLeft && icon != null) SizedBox(width: 10.w),
+                  if (!isIconLeft && icon != null) icon!,
+                ],
+              ),
       ),
     );
   }
@@ -756,7 +743,7 @@ class CustomBorderButton extends StatelessWidget {
           side: BorderSide(
             color:
                 borderColor ??
-                context.applyAppColor(palette: ColorPalete.brand, swatch: 500),
+                context.applyAppColors(palette: ColorPalete.brand, swatch: 500),
             width: 2,
           ),
           shape: RoundedRectangleBorder(
@@ -764,10 +751,9 @@ class CustomBorderButton extends StatelessWidget {
           ),
         ),
         onPressed: onPressed ?? () {},
-        child:
-            showLoading == true
-                ? const Center(child: CircularProgressIndicator())
-                : Text(label, style: labelTextStyle),
+        child: showLoading == true
+            ? const Center(child: CircularProgressIndicator())
+            : Text(label, style: labelTextStyle),
       ),
     );
   }
@@ -802,59 +788,49 @@ class CustomButtonWithIcon extends StatelessWidget {
       width: width ?? MediaQuery.of(context).size.width,
       child: ElevatedButton(
         style: ButtonStyle(
-          backgroundColor:
-              color != null
-                  ? WidgetStateProperty.all(color)
-                  : WidgetStateProperty.all(
-                    context.applyAppColor(
-                      palette: ColorPalete.brand,
-                      swatch: 500,
-                    ),
+          backgroundColor: color != null
+              ? WidgetStateProperty.all(color)
+              : WidgetStateProperty.all(
+                  context.applyAppColors(
+                    palette: ColorPalete.brand,
+                    swatch: 500,
                   ),
+                ),
           shape: WidgetStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
           ),
         ),
         onPressed: onPressed,
-        child:
-            showLoading == true
-                ? const Center(
-                  child: CircularProgressIndicator(color: AppColor.whiteColor),
-                )
-                : Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    if (leadingIcon != null)
-                      Icon(
-                        leadingIcon,
-                        size: 20.sp,
-                        color: context.applyAppColor(
-                          palette: ColorPalete.white,
-                        ),
-                      ),
-                    if (leadingIcon != null) SizedBox(width: 10.w),
-                    Text(
-                      label,
-                      style:
-                          context
-                              .textStyle(
-                                palette: ColorPalete.white,
-                                swatch: 500,
-                              )
-                              .largeBody
-                              .semiBold,
+        child: showLoading == true
+            ? const Center(
+                child: CircularProgressIndicator(color: AppColors.whiteColor),
+              )
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (leadingIcon != null)
+                    Icon(
+                      leadingIcon,
+                      size: 20.sp,
+                      color: context.applyAppColors(palette: ColorPalete.white),
                     ),
-                    SizedBox(width: 10.w),
-                    if (trailingIcon != null)
-                      Icon(
-                        trailingIcon,
-                        size: 20.sp,
-                        color: context.applyAppColor(
-                          palette: ColorPalete.white,
-                        ),
-                      ),
-                  ],
-                ),
+                  if (leadingIcon != null) SizedBox(width: 10.w),
+                  Text(
+                    label,
+                    style: context
+                        .textStyle(palette: ColorPalete.white, swatch: 500)
+                        .largeBody
+                        .semiBold,
+                  ),
+                  SizedBox(width: 10.w),
+                  if (trailingIcon != null)
+                    Icon(
+                      trailingIcon,
+                      size: 20.sp,
+                      color: context.applyAppColors(palette: ColorPalete.white),
+                    ),
+                ],
+              ),
       ),
     );
   }
