@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:noteapp/features/note/screen/favorite_screen.dart';
 import 'package:noteapp/features/note/screen/note_list_screen.dart';
 import 'package:noteapp/features/note/screen/search_screen.dart';
+import 'package:noteapp/features/note/screen/setting_screen.dart';
 
 class HomePage extends StatefulWidget {
   const new({super.key});
@@ -16,7 +17,7 @@ class _HomePageState extends State<HomePage> {
     NoteListScreen(),
     SearchScreen(),
     FavoriteScreen(),
-    Center(child: Text("Settings")),
+    SettingsScreen(),
   ];
   @override
   Widget build(BuildContext context) {
