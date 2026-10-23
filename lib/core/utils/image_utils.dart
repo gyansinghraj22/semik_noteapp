@@ -9,7 +9,7 @@ import 'package:noteapp/core/services/image_upload_service.dart';
 class ImageUtils {
   static Future customImagePicker() async {
     File file;
-    FilePickerResult? result = await FilePicker.pickFiles(
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
       allowMultiple: false,
       type: FileType.image,
     );

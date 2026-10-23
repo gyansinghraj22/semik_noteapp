@@ -5,7 +5,7 @@ import 'package:file_picker/file_picker.dart';
 Future<PlatformFile?> pickFile() async {
   const int maxFileSize = 2 * 1024 * 1024;
 
-  FilePickerResult? result = await FilePicker.pickFiles(
+  FilePickerResult? result = await FilePicker.platform.pickFiles(
     type: FileType.custom,
     allowedExtensions: ['csv', 'xlsx'],
   );

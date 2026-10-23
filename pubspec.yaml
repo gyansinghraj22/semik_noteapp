@@ -40,11 +40,12 @@ dependencies:
   iconoir_flutter: ^7.12.1
   get_it: ^9.3.0
   chucker_flutter: ^1.9.2
-  file_picker: ^11.0.3
+  file_picker: ^10.3.8
   image_picker: ^1.2.4
   dartz: ^0.10.1
   pinput: ^7.0.0
   logger: ^2.8.0
+  flutter_bloc: ^9.1.1
 
 dev_dependencies:
   flutter_test:
