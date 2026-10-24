@@ -35,7 +35,7 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
         var result = await noteService.getNotes();
         result.fold(
           (l) {
-            emit(GetNoteByIdSuccessState(response: l));
+            emit(GetNoteSuccessState(response: l));
           },
           (r) {
             emit(

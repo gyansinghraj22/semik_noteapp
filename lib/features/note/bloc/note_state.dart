@@ -7,7 +7,7 @@ abstract class NoteState {}
 class NoteInitialState extends NoteState {}
 
 class GetNoteSuccessState extends NoteState {
-  final dynamic response;
+  final Map<String, dynamic> response;
   GetNoteSuccessState({required this.response});
 }
 

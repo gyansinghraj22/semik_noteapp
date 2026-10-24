@@ -20,17 +20,17 @@ class SearchScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            Expanded(
-              child: ListView.builder(
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return const Padding(
-                    padding: EdgeInsetsGeometry.only(bottom: 12),
-                    child: NoteCardItem(),
-                  );
-                },
-              ),
-            ),
+            // Expanded(
+            //   child: ListView.builder(
+            //     itemCount: 10,
+            //     itemBuilder: (context, index) {
+            //       return const Padding(
+            //         padding: EdgeInsetsGeometry.only(bottom: 12),
+            //         child: NoteCardItem(note: null,),
+            //       );
+            //     },
+            //   ),
+            // ),
           ],
         ),
       ),

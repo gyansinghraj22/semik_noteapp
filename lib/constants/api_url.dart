@@ -1,11 +1,11 @@
 class ApiUrl {
-  static const String baseUrl = "hjksadljkflhdjks/asdflklkfsdj";
-  static const String login = "hjksadljkflhdjks/asdflklkfsdj";
+  static const String baseUrl = "https://api-note-3mva.onrender.com/";
+  static const String login = "auth/login/";
   static const String register = "hjksadljkflhdjks/asdflklkfsdj";
   static const String addNote = "hjksadljkflhdjks/asdflklkfsdj";
   static const String deleteNote = "hjksadljkflhdjks/asdflklkfsdj";
   static const String refreshToken = "hjksadljkflhdjks/asdflklkfsdj";
-  static const String getNote = "hjksadljkflhdjks/asdflklkfsdj";
+  static const String getNote = "note/get-notes";
   static const String updateNote = "hjksadljkflhdjks/asdflklkfsdj";
   static const String getById = "hjksadljkflhdjks/asdflklkfsdj";
   static const String resetPassword = "hjksadljkflhdjks/asdflklkfsdj";

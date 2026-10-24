@@ -14,7 +14,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   final Set<String> selectedFilters = {};
   final List<NoteModel> sampleNotes = [
     NoteModel(
-      id: 1,
+      id: "1",
       title: 'Morning Routine',
       content: 'Wake up at 6:00 AM, drink a glass of water, do 20 minutes of exercise, and spend 15 minutes reading.',
       createdAt: DateTime(2026, 10, 10, 6, 30),
@@ -24,7 +24,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       categoryId: 1,
     ),
     NoteModel(
-      id: 2,
+      id: "2",
       title: 'Flutter Project Ideas',
       content: 'Build a notes app with categories, search, dark mode, local database storage, and the ability to pin and favourite notes.',
       createdAt: DateTime(2026, 10, 11, 10, 0),
@@ -34,7 +34,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       categoryId: 2,
     ),
     NoteModel(
-      id: 3,
+      id: "3",
       title: 'Grocery Shopping List',
       content: 'Buy rice, milk, eggs, bread, fresh vegetables, apples, cooking oil, and coffee from the supermarket.',
       createdAt: DateTime(2026, 10, 12, 9, 0),
@@ -44,7 +44,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       categoryId: 3,
     ),
     NoteModel(
-      id: 4,
+      id: "4",
       title: 'Meeting Notes',
       content: 'Discuss the project timeline, review the current design, assign tasks to team members, and finalize the next release date.',
       createdAt: DateTime(2026, 10, 13, 11, 0),
@@ -54,7 +54,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       categoryId: 4,
     ),
     NoteModel(
-      id: 5,
+      id: "5",
       title: 'Learning Dart',
       content: 'Review classes, constructors, inheritance, null safety, lists, maps, asynchronous programming, and Future and Stream.',
       createdAt: DateTime(2026, 10, 13, 16, 0),
@@ -64,7 +64,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       categoryId: 2,
     ),
     NoteModel(
-      id: 6,
+      id: "6",
       title: 'Monthly Budget',
       content: 'Track monthly expenses for rent, groceries, transportation, internet, electricity, savings, and personal spending.',
       createdAt: DateTime(2026, 10, 14, 9, 30),
@@ -74,7 +74,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       categoryId: 5,
     ),
     NoteModel(
-      id: 7,
+      id: "7",
       title: 'Book Recommendations',
       content: 'Read Atomic Habits by James Clear, Deep Work by Cal Newport, and The Psychology of Money by Morgan Housel.',
       createdAt: DateTime(2026, 10, 15, 13, 0),
@@ -84,7 +84,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       categoryId: 6,
     ),
     NoteModel(
-      id: 8,
+      id: "8",
       title: 'Weekend Travel Plan',
       content: 'Plan a weekend trip with friends. Check transportation options, accommodation, weather, travel costs, and places to visit.',
       createdAt: DateTime(2026, 10, 16, 8, 0),
@@ -94,7 +94,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       categoryId: 7,
     ),
     NoteModel(
-      id: 9,
+      id: "9",
       title: 'Important Reminders',
       content: 'Renew the subscription, back up important project files, reply to pending emails, and organize documents.',
       createdAt: DateTime(2026, 10, 17, 14, 0),
@@ -104,7 +104,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       categoryId: 1,
     ),
     NoteModel(
-      id: 10,
+      id: "1",
       title: 'Personal Goals',
       content: 'Improve programming skills, finish the current Flutter project, read regularly, save money each month, and maintain a balanced routine.',
       createdAt: DateTime(2026, 10, 18, 19, 0),
@@ -211,14 +211,14 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                 ],
               ),
             ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate((context, index) {
-                return const Padding(
-                  padding: EdgeInsets.only(bottom: 12.0),
-                  child: NoteCardItem(),
-                );
-              }, childCount: sampleNotes.length),
-            ),
+            // SliverList(
+            //   delegate: SliverChildBuilderDelegate((context, index) {
+            //     return const Padding(
+            //       padding: EdgeInsets.only(bottom: 12.0),
+            //       child: NoteCardItem(),
+            //     );
+            //   }, childCount: sampleNotes.length),
+            // ),
           ],
         ),
       ),

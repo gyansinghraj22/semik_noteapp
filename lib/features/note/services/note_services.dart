@@ -1,4 +1,3 @@
-import 'package:chucker_flutter/chucker_flutter.dart';
 import 'package:dartz/dartz.dart';
 import 'package:noteapp/constants/api_url.dart';
 import 'package:noteapp/core/common/error_model/error_model.dart';
@@ -6,13 +5,13 @@ import 'package:noteapp/core/network/dio_client.dart';
 
 class NoteService {
   final DioClient dioClient;
-  NoteService({required this.dioClient});
+  NoteService(this.dioClient);
 
   Future<Either<dynamic, ErrorModel>> getNotes() async {
     try {
       var response = await dioClient.getData(ApiUrl.getNote);
       if (response.statusCode == 200 || response.statusCode == 201) {
-        return left(response);
+        return left(response.data);
       } else {
         return right(
           ErrorModel(
@@ -66,7 +65,7 @@ class NoteService {
     }
   }
 
-   Future<Either<dynamic, ErrorModel>> getNoteById({
+  Future<Either<dynamic, ErrorModel>> getNoteById({
     required Map<String, String> formData,
   }) async {
     try {

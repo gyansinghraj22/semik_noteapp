@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:noteapp/features/note/bloc/note_bloc.dart';
+import 'package:noteapp/features/note/bloc/note_event.dart';
+import 'package:noteapp/features/note/bloc/note_state.dart';
 
 import 'package:noteapp/features/note/model/note_model.dart';
+import 'package:noteapp/features/note/screen/note_details_screen.dart';
 import 'package:noteapp/features/note/widgets/note_card.dart';
 import 'package:noteapp/features/note/widgets/pinned_note_card.dart';
 
@@ -23,13 +28,30 @@ class NoteListScreen extends StatefulWidget {
 }
 
 class _NoteListScreenState extends State<NoteListScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) {
+        return;
+      }
+
+      context.read<NoteBloc>().add(NoteGetEvent(formData: {}));
+    });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      FocusScope.of(context).unfocus();
+    });
+  }
+
   final Set<String> selectedFilters = {};
   final List<String> filterChips = ["All", "Personal", "Work"];
   String? query;
   final TextEditingController searchController = TextEditingController();
   final List<NoteModel> sampleNotes = [
     NoteModel(
-      id: 1,
+      id: "1",
       title: 'Morning Routine',
       content: 'Wake up at 6:00 AM, drink a glass of water, do 20 minutes of exercise, and spend 15 minutes reading.',
       createdAt: DateTime(2026, 10, 10, 6, 30),
@@ -39,7 +61,7 @@ class _NoteListScreenState extends State<NoteListScreen> {
       categoryId: 1,
     ),
     NoteModel(
-      id: 2,
+      id: "2",
       title: 'Flutter Project Ideas',
       content: 'Build a notes app with categories, search, dark mode, local database storage, and the ability to pin and favourite notes.',
       createdAt: DateTime(2026, 10, 11, 10, 0),
@@ -49,7 +71,7 @@ class _NoteListScreenState extends State<NoteListScreen> {
       categoryId: 2,
     ),
     NoteModel(
-      id: 3,
+      id: "3",
       title: 'Grocery Shopping List',
       content: 'Buy rice, milk, eggs, bread, fresh vegetables, apples, cooking oil, and coffee from the supermarket.',
       createdAt: DateTime(2026, 10, 12, 9, 0),
@@ -59,7 +81,7 @@ class _NoteListScreenState extends State<NoteListScreen> {
       categoryId: 3,
     ),
     NoteModel(
-      id: 4,
+      id: "4",
       title: 'Meeting Notes',
       content: 'Discuss the project timeline, review the current design, assign tasks to team members, and finalize the next release date.',
       createdAt: DateTime(2026, 10, 13, 11, 0),
@@ -69,7 +91,7 @@ class _NoteListScreenState extends State<NoteListScreen> {
       categoryId: 4,
     ),
     NoteModel(
-      id: 5,
+      id: "5",
       title: 'Learning Dart',
       content: 'Review classes, constructors, inheritance, null safety, lists, maps, asynchronous programming, and Future and Stream.',
       createdAt: DateTime(2026, 10, 13, 16, 0),
@@ -79,7 +101,7 @@ class _NoteListScreenState extends State<NoteListScreen> {
       categoryId: 2,
     ),
     NoteModel(
-      id: 6,
+      id: "6",
       title: 'Monthly Budget',
       content: 'Track monthly expenses for rent, groceries, transportation, internet, electricity, savings, and personal spending.',
       createdAt: DateTime(2026, 10, 14, 9, 30),
@@ -89,7 +111,7 @@ class _NoteListScreenState extends State<NoteListScreen> {
       categoryId: 5,
     ),
     NoteModel(
-      id: 7,
+      id: "7",
       title: 'Book Recommendations',
       content: 'Read Atomic Habits by James Clear, Deep Work by Cal Newport, and The Psychology of Money by Morgan Housel.',
       createdAt: DateTime(2026, 10, 15, 13, 0),
@@ -99,7 +121,7 @@ class _NoteListScreenState extends State<NoteListScreen> {
       categoryId: 6,
     ),
     NoteModel(
-      id: 8,
+      id: "8",
       title: 'Weekend Travel Plan',
       content: 'Plan a weekend trip with friends. Check transportation options, accommodation, weather, travel costs, and places to visit.',
       createdAt: DateTime(2026, 10, 16, 8, 0),
@@ -109,7 +131,7 @@ class _NoteListScreenState extends State<NoteListScreen> {
       categoryId: 7,
     ),
     NoteModel(
-      id: 9,
+      id: "9",
       title: 'Important Reminders',
       content: 'Renew the subscription, back up important project files, reply to pending emails, and organize documents.',
       createdAt: DateTime(2026, 10, 17, 14, 0),
@@ -119,7 +141,7 @@ class _NoteListScreenState extends State<NoteListScreen> {
       categoryId: 1,
     ),
     NoteModel(
-      id: 10,
+      id: "1",
       title: 'Personal Goals',
       content: 'Improve programming skills, finish the current Flutter project, read regularly, save money each month, and maintain a balanced routine.',
       createdAt: DateTime(2026, 10, 18, 19, 0),
@@ -287,16 +309,175 @@ class _NoteListScreenState extends State<NoteListScreen> {
                 ),
               ),
             ),
+            BlocBuilder<NoteBloc, NoteState>(
+              builder: (context, state) {
+                if (state is NoteInitialState) {
+                  return const SliverToBoxAdapter(
+                    child: Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(24.0),
+                        child: CircularProgressIndicator(),
+                      ),
+                    ),
+                  );
+                }
 
-            // Vertical Notes List
-            SliverList(
-              delegate: SliverChildBuilderDelegate((context, index) {
-                return const Padding(
-                  padding: EdgeInsets.only(bottom: 12.0),
-                  child: NoteCardItem(),
-                );
-              }, childCount: sampleNotes.length),
+                if (state is GetNoteSuccessState) {
+                  // 1. Extract the raw list from response data
+                  final notesData = (state.response["data"] as List<dynamic>);
+
+                  if (notesData.isEmpty) {
+                    return const SliverToBoxAdapter(
+                      child: Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(20),
+                          child: Text("No notes found"),
+                        ),
+                      ),
+                    );
+                  }
+
+                  // 2. Map raw JSON maps to NoteModel objects
+                  final notes = notesData
+                      .map(
+                        (json) =>
+                            NoteModel.fromMap(json as Map<String, dynamic>),
+                      )
+                      .toList();
+
+                  return SliverPadding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    sliver: SliverList(
+                      delegate: SliverChildBuilderDelegate((context, index) {
+                        final currentNote = notes[index];
+
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 12),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute<void>(
+                                  builder: (context) => NoteDetailsScreen(
+                                    // Pass the NoteModel if your detail screen accepts it
+                                    // note: currentNote,
+                                  ),
+                                ),
+                              );
+                            },
+                            // Pass the strongly-typed NoteModel to your card item
+                            child: NoteCardItem(note: currentNote),
+                          ),
+                        );
+                      }, childCount: 2),
+                    ),
+                  );
+                }
+
+                if (state is GetNoteErrorState) {
+                  return const SliverToBoxAdapter(
+                    child: Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(24.0),
+                        child: Text(
+                          "Note loading failed",
+                          style: TextStyle(color: Colors.red, fontSize: 16),
+                        ),
+                      ),
+                    ),
+                  );
+                }
+
+                return const SliverToBoxAdapter(child: SizedBox.shrink());
+              },
             ),
+            // BlocBuilder<NoteBloc, NoteState>(
+            //   builder: (context, state) {
+            //     if (state is NoteInitialState) {
+            //       return const SliverToBoxAdapter(
+            //         child: Center(
+            //           child: Padding(
+            //             padding: EdgeInsets.all(24.0),
+            //             child: CircularProgressIndicator(),
+            //           ),
+            //         ),
+            //       );
+            //     }
+
+            //     if (state is GetNoteSuccessState) {
+            //       // Safely cast the response data to a List
+            //       final notes = (state.response["data"] as List<dynamic>);
+
+            //       if (notes.isEmpty) {
+            //         return const SliverToBoxAdapter(
+            //           child: Center(
+            //             child: Padding(
+            //               padding: EdgeInsets.all(20),
+            //               child: Text("No notes found"),
+            //             ),
+            //           ),
+            //         );
+            //       }
+
+            //       return SliverPadding(
+            //         padding: const EdgeInsets.symmetric(horizontal: 16),
+            //         sliver: SliverList(
+            //           delegate: SliverChildBuilderDelegate((context, index) {
+            //             // Changed 'state' to 'index'
+            //             // Get the specific note for this row
+            //             final currentNote =
+            //                 notes[index] as Map<String, dynamic>;
+
+            //             return Padding(
+            //               padding: const EdgeInsets.only(bottom: 12),
+            //               child: GestureDetector(
+            //                 onTap: () {
+            //                   Navigator.push(
+            //                     context,
+            //                     MaterialPageRoute<void>(
+            //                       builder: (context) => NoteDetailsScreen(
+            //                         // note: currentNote, // Uncomment if your detail screen accepts it
+            //                       ),
+            //                     ),
+            //                   );
+            //                 },
+            //                 // Pass the current note map to your card item
+            //                 child: NoteCardItem(
+            //                   // note: currentNote
+            //                 ),
+            //               ),
+            //             );
+            //           }, childCount: notes.length),
+            //         ),
+            //       );
+            //     }
+
+            //     if (state is GetNoteErrorState) {
+            //       return const SliverToBoxAdapter(
+            //         child: Center(
+            //           child: Padding(
+            //             padding: EdgeInsets.all(24.0),
+            //             child: Text(
+            //               "Note loading failed",
+            //               style: TextStyle(color: Colors.red, fontSize: 16),
+            //             ),
+            //           ),
+            //         ),
+            //       );
+            //     }
+
+            //     return const SliverToBoxAdapter(child: SizedBox.shrink());
+            //   },
+            // ),
+            // Vertical Notes List
+            // SliverList(
+            //   delegate: SliverChildBuilderDelegate((context, index) {
+            //     return const Padding(
+            //       padding: EdgeInsets.only(bottom: 12.0),
+            //       child: NoteCardItem(),
+            //     );
+            //   }, childCount: sampleNotes.length),
+            // ),
           ],
         ),
       ),
